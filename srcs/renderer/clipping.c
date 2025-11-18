@@ -6,7 +6,7 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 22:06:06 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/18 22:06:08 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/18 22:50:51 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,13 @@ int	line_completely_outside(t_point start, t_point end)
 	if (start.y > WIN_HEIGHT + margin && end.y > WIN_HEIGHT + margin)
 		return (1);
 	return (0);
+}
+
+int	point_roughly_visible(t_point point)
+{
+	int	margin;
+
+	margin = 200;
+	return (point.x >= -margin && point.x < WIN_WIDTH + margin && point.y
+		>= -margin && point.y < WIN_HEIGHT + margin);
 }

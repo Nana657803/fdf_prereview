@@ -6,7 +6,7 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:10:19 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/18 22:27:04 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/18 22:49:18 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static void	clear_canvas(t_map *map)
 static void	connect_horizontal(t_map *map, t_point **screen, int col, int row)
 {
 	if (col >= map->width - 1)
+		return ;
+	if (!point_roughly_visible(screen[row][col])
+		&& !point_roughly_visible(screen[row][col + 1]))
 		return ;
 	draw_line(map, screen[row][col], screen[row][col + 1], DEFAULT_COLOR);
 }

@@ -6,7 +6,7 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:05:16 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/18 22:28:08 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/18 22:51:54 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ int		line_completely_outside(t_point start, t_point end);
 t_point	**allocate_screen_points(t_map *map);
 void	free_screen_points(t_point **screen_points, int height);
 void	precompute_screen_points(t_map *map, t_point **screen_points);
+int		point_roughly_visible(t_point point);
 
 #endif
