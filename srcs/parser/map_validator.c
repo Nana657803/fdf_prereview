@@ -6,11 +6,30 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:09:41 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/10 14:09:43 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/18 21:36:56 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
+
+void	validate_file_extension(char *filename)
+{
+	int		len;
+	char	*extension;
+
+	len = ft_strlen(filename);
+	if (len < 5)
+	{
+		ft_putendl_fd("Error: Invalid file extension (expected .fdf)", 2);
+		exit(1);
+	}
+	extension = filename + len - 4;
+	if (ft_strncmp(extension, ".fdf", 4) != 0)
+	{
+		ft_putendl_fd("Error: Invalid file extension (expected .fdf)", 2);
+		exit(1);
+	}
+}
 
 int	count_line_elements(char *line)
 {

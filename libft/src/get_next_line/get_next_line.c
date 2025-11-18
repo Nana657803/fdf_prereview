@@ -6,7 +6,7 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 11:51:34 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/05/10 14:45:19 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/18 20:58:30 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*get_next_line(int fd)
 	char	c;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (ft_getc(-1), NULL);
 	line.string = NULL;
 	line.length = 0;
 	line.capacity = 0;
@@ -54,15 +54,15 @@ char	*get_next_line(int fd)
 	{
 		c = ft_getc(fd);
 		if (c == READERROR)
-			return (free(line.string), NULL);
+			return (free(line.string), ft_getc(-1), NULL);
 		if (c == '\0')
 			break ;
 		if (!ft_putc(&line, c))
-			return (free(line.string), NULL);
+			return (free(line.string), ft_getc(-1), NULL);
 		if (c == '\n')
 			break ;
 	}
 	if (line.length > 0 && !ft_putc(&line, '\0'))
-		return (free(line.string), NULL);
+		return (free(line.string), ft_getc(-1), NULL);
 	return (line.string);
 }

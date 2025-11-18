@@ -6,7 +6,7 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:06:11 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/10 15:06:13 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/18 21:35:45 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	main(int argc, char **argv)
 		ft_putendl_fd("Usage: ./fdf <filename.fdf>", 2);
 		return (1);
 	}
+	validate_file_extension(argv[1]);
 	initialize_map(&map);
 	load_map_file(argv[1], &map);
 	setup_mlx_environment(&map);

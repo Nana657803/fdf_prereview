@@ -6,7 +6,7 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:05:16 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/10 15:27:48 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/18 22:28:08 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,12 @@ t_point	project_to_screen(t_point point, t_map *map);
 int		handle_keypress(int keycode, t_map *map);
 int		handle_mouse(int button, int x, int y, t_map *map);
 int		handle_window_close(t_map *map);
+void	validate_file_extension(char *filename);
+int		point_in_bounds(t_point point);
+int		line_completely_outside(t_point start, t_point end);
+
+t_point	**allocate_screen_points(t_map *map);
+void	free_screen_points(t_point **screen_points, int height);
+void	precompute_screen_points(t_map *map, t_point **screen_points);
 
 #endif
