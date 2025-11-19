@@ -6,11 +6,11 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:09:41 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/18 21:36:56 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/19 22:21:39 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fdf.h"
+#include "fdf.h"
 
 void	validate_file_extension(char *filename)
 {
@@ -53,28 +53,44 @@ int	count_line_elements(char *line)
 	return (count);
 }
 
-void	parse_coordinates(t_point *points, char *line, int row, int width)
+int	validate_z_value(int z_value)
+{
+	if (z_value > MAX_Z_VALUE || z_value < MIN_Z_VALUE)
+		return (0);
+	return (1);
+}
+
+static void	free_tokens(char **tokens)
+{
+	int	i;
+
+	i = 0;
+	while (tokens[i])
+		free(tokens[i++]);
+	free(tokens);
+}
+
+int	parse_coordinates(t_point *points, char *line, int row, int width)
 {
 	char	**tokens;
 	int		col;
-	int		i;
 
 	tokens = ft_split(line, ' ');
 	if (!tokens)
-		return ;
+		return (1);
 	col = 0;
 	while (col < width)
 	{
 		points[col].x = col;
 		points[col].y = row;
 		points[col].z = ft_atoi(tokens[col]);
+		if (!validate_z_value(points[col].z))
+		{
+			free_tokens(tokens);
+			return (1);
+		}
 		col++;
 	}
-	i = 0;
-	while (tokens[i])
-	{
-		free(tokens[i]);
-		i++;
-	}
-	free(tokens);
+	free_tokens(tokens);
+	return (0);
 }

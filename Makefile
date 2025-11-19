@@ -6,7 +6,7 @@
 #    By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/10 14:11:01 by ndobashi          #+#    #+#              #
-#    Updated: 2025/11/18 22:30:02 by ndobashi         ###   ########.fr        #
+#    Updated: 2025/11/19 22:33:04 by ndobashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ LIBS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 SRCS_DIR = srcs
 SRCS = $(SRCS_DIR)/core/main.c \
        $(SRCS_DIR)/parser/map_reader.c \
+	   $(SRCS_DIR)/parser/map_reader_utils.c \
        $(SRCS_DIR)/parser/map_validator.c \
-	   $(SRCS_DIR)/renderer/clipping.c \
 	   $(SRCS_DIR)/renderer/transform_cache.c \
        $(SRCS_DIR)/renderer/projection.c \
        $(SRCS_DIR)/renderer/draw_map.c \

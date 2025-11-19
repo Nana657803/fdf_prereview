@@ -6,11 +6,11 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:10:32 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/10 14:10:34 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/19 22:21:11 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fdf.h"
+#include "fdf.h"
 
 void	set_pixel(t_map *map, int x, int y, int color)
 {

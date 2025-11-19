@@ -6,11 +6,11 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:06:11 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/18 21:35:45 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/19 23:07:15 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fdf.h"
+#include "fdf.h"
 
 void	initialize_map(t_map *map)
 {
@@ -22,6 +22,7 @@ void	initialize_map(t_map *map)
 	map->img_ptr = NULL;
 	map->img_data = NULL;
 	map->zoom_factor = DEFAULT_ZOOM;
+	map->z_scale_factor = 1.0;
 	map->shift_x = WIN_WIDTH / 2;
 	map->shift_y = WIN_HEIGHT / 2;
 }
@@ -73,8 +74,8 @@ static void	setup_mlx_environment(t_map *map)
 
 static void	setup_event_hooks(t_map *map)
 {
-	mlx_hook(map->win_ptr, 2, 1L << 0, handle_keypress, map);
-	mlx_hook(map->win_ptr, 17, 0L, handle_window_close, map);
+	mlx_key_hook(map->win_ptr, handle_keypress, map);
+	mlx_hook(map->win_ptr, DestroyNotify, NoEventMask, handle_window_close, map);
 	mlx_mouse_hook(map->win_ptr, handle_mouse, map);
 }
 

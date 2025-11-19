@@ -6,7 +6,7 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:05:16 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/18 22:51:54 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/19 23:16:22 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <X11/X.h>
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
@@ -35,15 +36,14 @@
 # define MAX_ZOOM 500.0
 # define ZOOM_STEP 1.1
 
-# ifdef __linux__
-#  define KEY_ESC 65307
-#  define MOUSE_SCROLL_UP 4
-#  define MOUSE_SCROLL_DOWN 5
-# else
-#  define KEY_ESC 53
-#  define MOUSE_SCROLL_UP 4
-#  define MOUSE_SCROLL_DOWN 5
-# endif
+# define MAX_Z_VALUE 10000
+# define MIN_Z_VALUE -10000
+
+# define MOUSE_SCROLL_UP 4
+# define MOUSE_SCROLL_DOWN 5
+
+# define Z_SCALE_MAX 2.0
+# define Z_SCALE_MIN 0.2
 
 typedef struct s_point
 {
@@ -75,6 +75,7 @@ typedef struct s_map
 	int			line_size;
 	int			endian;
 	double		zoom_factor;
+	double		z_scale_factor;
 	int			shift_x;
 	int			shift_y;
 }	t_map;
@@ -83,7 +84,7 @@ void	initialize_map(t_map *map);
 void	terminate_program(t_map *map, char *message, int exit_code);
 void	load_map_file(char *filename, t_map *map);
 int		count_line_elements(char *line);
-void	parse_coordinates(t_point *points, char *line, int row, int width);
+int		parse_coordinates(t_point *points, char *line, int row, int width);
 void	render_wireframe(t_map *map);
 void	draw_line(t_map *map, t_point start, t_point end, int color);
 void	set_pixel(t_map *map, int x, int y, int color);
@@ -92,12 +93,10 @@ int		handle_keypress(int keycode, t_map *map);
 int		handle_mouse(int button, int x, int y, t_map *map);
 int		handle_window_close(t_map *map);
 void	validate_file_extension(char *filename);
-int		point_in_bounds(t_point point);
-int		line_completely_outside(t_point start, t_point end);
 
 t_point	**allocate_screen_points(t_map *map);
 void	free_screen_points(t_point **screen_points, int height);
 void	precompute_screen_points(t_map *map, t_point **screen_points);
-int		point_roughly_visible(t_point point);
+void	free_and_exit(char *line, int fd, t_map *map, char *msg);
 
 #endif

@@ -6,16 +6,41 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:24:47 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/10 15:24:48 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/19 23:15:14 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fdf.h"
+#include "fdf.h"
+#include <X11/keysym.h>
+
+#include <stdio.h>
+
+void	z_scale_up(t_map *map)
+{
+	if(map->z_scale_factor < Z_SCALE_MAX)
+	{
+		map->z_scale_factor += 0.1;
+		render_wireframe(map);
+	}
+}
+
+void	z_scale_down(t_map *map)
+{
+	if(map->z_scale_factor > Z_SCALE_MIN)
+	{
+		map->z_scale_factor -= 0.1;
+		render_wireframe(map);
+	}
+}
 
 int	handle_keypress(int keycode, t_map *map)
 {
-	if (keycode == KEY_ESC)
+	if (keycode == XK_Escape)
 		terminate_program(map, NULL, 0);
+	else if (keycode == XK_r)
+		z_scale_up(map);
+	else if (keycode == XK_f)
+		z_scale_down(map);
 	return (0);
 }
 

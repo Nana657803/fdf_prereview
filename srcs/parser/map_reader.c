@@ -6,11 +6,11 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:09:26 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/18 21:21:04 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/19 22:21:58 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fdf.h"
+#include "fdf.h"
 
 static int	open_map_file(char *filename, t_map *map)
 {
@@ -33,15 +33,12 @@ static void	calculate_map_size(char *filename, t_map *map)
 	while (line)
 	{
 		elements_count = count_line_elements(line);
+		if (map->width == 0 && elements_count == 0)
+			free_and_exit(line, -1, map, "Error: Newline at top of the file.");
 		if (map->width == 0)
 			map->width = elements_count;
 		else if (elements_count != map->width)
-		{
-			free(line);
-			close(fd);
-			get_next_line(-1);
-			terminate_program(map, "Error: Map is not rectangular", 1);
-		}
+			free_and_exit(line, -1, map, "Error: Map is not rectangular");
 		map->height++;
 		free(line);
 		line = get_next_line(fd);
@@ -68,15 +65,11 @@ static void	populate_map_data(char *filename, t_map *map)
 	line = get_next_line(fd);
 	while (line)
 	{
-		map->points[row] = (t_point *)malloc(sizeof(t_point) * map->width);
+		map->points[row] = malloc(sizeof(t_point) * map->width);
 		if (!map->points[row])
-		{
-			free(line);
-			close(fd);
-			get_next_line(-1);
-			terminate_program(map, "Error: Memory allocation failed", 1);
-		}
-		parse_coordinates(map->points[row], line, row, map->width);
+			free_and_exit(line, fd, map, "Error: Memory allocation failed");
+		if (parse_coordinates(map->points[row], line, row, map->width))
+			free_and_exit(line, fd, map, "Error: Z value out of range");
 		free(line);
 		row++;
 		line = get_next_line(fd);

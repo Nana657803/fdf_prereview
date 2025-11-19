@@ -6,17 +6,17 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:10:07 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/10 14:10:09 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/19 23:05:38 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fdf.h"
+#include "fdf.h"
 
 static t_point	apply_scaling(t_point point, t_map *map)
 {
 	point.x *= map->zoom_factor;
 	point.y *= map->zoom_factor;
-	point.z *= map->zoom_factor * Z_SCALE_FACTOR;
+	point.z *= map->zoom_factor * map->z_scale_factor;
 	return (point);
 }
 

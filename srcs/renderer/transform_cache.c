@@ -6,11 +6,11 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 22:25:26 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/18 22:32:08 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/19 22:20:09 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/fdf.h"
+#include "fdf.h"
 
 t_point	**allocate_screen_points(t_map *map)
 {
