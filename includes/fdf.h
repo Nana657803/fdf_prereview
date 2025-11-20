@@ -6,7 +6,7 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:05:16 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/20 18:13:39 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/20 20:23:08 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 
 # define DEFAULT_COLOR 0xFFFFFF
 
-# define ANGLE_30 0.523599
-# define Z_SCALE_FACTOR 0.25
+# define COS_30 0.866025403784439
+# define SIN_30 0.5
 # define DEFAULT_ZOOM 20.0
 # define MIN_ZOOM 0.5
 # define MAX_ZOOM 500.0

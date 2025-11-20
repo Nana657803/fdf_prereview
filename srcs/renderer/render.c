@@ -6,7 +6,7 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 17:20:09 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/20 17:37:21 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/20 20:49:13 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	render_wireframe(t_map *map)
 {
 	t_point	**screen_points;
 
-	clear_canvas(map);
 	screen_points = allocate_screen_points(map);
 	if (!screen_points)
 		terminate_program(map, "Error: Memory allocation failed", 1);
 	screen_transform(map, screen_points);
+	clear_canvas(map);
 	draw_grid(map, screen_points);
 	free_screen_points(screen_points, map->height);
 	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->img_ptr, 0, 0);

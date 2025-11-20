@@ -6,7 +6,7 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:10:07 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/19 23:05:38 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/20 20:25:33 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static t_point	isometric_transform(t_point point)
 	double	temp_x;
 
 	temp_x = point.x;
-	result.x = (temp_x - point.y) * cos(ANGLE_30);
-	result.y = (temp_x + point.y) * sin(ANGLE_30) - point.z;
+	result.x = (temp_x - point.y) * COS_30;
+	result.y = (temp_x + point.y) * SIN_30 - point.z;
 	result.z = point.z;
 	return (result);
 }

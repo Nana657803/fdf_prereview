@@ -6,7 +6,7 @@
 #    By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/10 14:11:01 by ndobashi          #+#    #+#              #
-#    Updated: 2025/11/20 17:23:20 by ndobashi         ###   ########.fr        #
+#    Updated: 2025/11/20 20:07:15 by ndobashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRCS = $(SRCS_DIR)/core/main.c \
        $(SRCS_DIR)/renderer/draw_line.c \
        $(SRCS_DIR)/events/event_handler.c \
 	   $(SRCS_DIR)/events/z_scale_control.c \
-	   $(SRCS_DIR)/events/zoom_control.c
+	   $(SRCS_DIR)/events/zoom_control.c 
 
 OBJS_DIR = objs
 OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
