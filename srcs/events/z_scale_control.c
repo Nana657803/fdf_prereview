@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event_handler.c                                    :+:      :+:    :+:   */
+/*   z_scale_control.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 15:24:47 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/20 16:05:17 by ndobashi         ###   ########.fr       */
+/*   Created: 2025/11/20 16:05:10 by ndobashi          #+#    #+#             */
+/*   Updated: 2025/11/20 16:05:12 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	handle_expose(t_map *map)
+void	z_scale_up(t_map *map)
 {
-	render_wireframe(map);
-	return (0);
+	if (map->z_scale_factor < Z_SCALE_MAX)
+	{
+		map->z_scale_factor += 0.1;
+		render_wireframe(map);
+	}
 }
 
-int	handle_keypress(int keycode, t_map *map)
+void	z_scale_down(t_map *map)
 {
-	if (keycode == XK_Escape)
-		terminate_program(map, NULL, 0);
-	else if (keycode == XK_r)
-		z_scale_up(map);
-	else if (keycode == XK_f)
-		z_scale_down(map);
-	return (0);
-}
-
-int	handle_window_close(t_map *map)
-{
-	terminate_program(map, NULL, 0);
-	return (0);
+	if (map->z_scale_factor > Z_SCALE_MIN)
+	{
+		map->z_scale_factor -= 0.1;
+		render_wireframe(map);
+	}
 }

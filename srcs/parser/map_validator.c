@@ -6,7 +6,7 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:09:41 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/19 22:21:39 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/20 18:00:28 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	count_line_elements(char *line)
 	return (count);
 }
 
-int	validate_z_value(int z_value)
+static int	validate_z_value(int z_value)
 {
 	if (z_value > MAX_Z_VALUE || z_value < MIN_Z_VALUE)
 		return (0);

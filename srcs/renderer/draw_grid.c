@@ -1,24 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   draw_grid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 14:10:19 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/19 22:32:48 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/20 18:34:02 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	clear_canvas(t_map *map)
-{
-	int	total_size;
-
-	total_size = WIN_WIDTH * WIN_HEIGHT * (map->bits_per_pixel / 8);
-	ft_bzero(map->img_data, total_size);
-}
 
 static void	connect_horizontal(t_map *map, t_point **screen, int col, int row)
 {
@@ -34,7 +27,7 @@ static void	connect_vertical(t_map *map, t_point **screen, int col, int row)
 	draw_line(map, screen[row][col], screen[row + 1][col], DEFAULT_COLOR);
 }
 
-static void	draw_all_connections(t_map *map, t_point **screen_points)
+void	draw_grid(t_map *map, t_point **screen_points)
 {
 	int	row;
 	int	col;
@@ -45,24 +38,11 @@ static void	draw_all_connections(t_map *map, t_point **screen_points)
 		col = 0;
 		while (col < map->width)
 		{
+			set_pixel(map,  screen_points[row][col].x,  screen_points[row][col].y, DEFAULT_COLOR);
 			connect_horizontal(map, screen_points, col, row);
 			connect_vertical(map, screen_points, col, row);
 			col++;
 		}
 		row++;
 	}
-}
-
-void	render_wireframe(t_map *map)
-{
-	t_point	**screen_points;
-
-	clear_canvas(map);
-	screen_points = allocate_screen_points(map);
-	if (!screen_points)
-		terminate_program(map, "Error: Memory allocation failed", 1);
-	precompute_screen_points(map, screen_points);
-	draw_all_connections(map, screen_points);
-	free_screen_points(screen_points, map->height);
-	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->img_ptr, 0, 0);
 }

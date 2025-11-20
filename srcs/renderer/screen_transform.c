@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform_cache.c                                  :+:      :+:    :+:   */
+/*   screen_transform.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 22:25:26 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/19 22:20:09 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:32:16 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	free_screen_points(t_point **screen_points, int height)
 	free(screen_points);
 }
 
-void	precompute_screen_points(t_map *map, t_point **screen_points)
+void	screen_transform(t_map *map, t_point **screen_points)
 {
 	int	row;
 	int	col;

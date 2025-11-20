@@ -6,7 +6,7 @@
 /*   By: ndobashi <ndobashi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:05:16 by ndobashi          #+#    #+#             */
-/*   Updated: 2025/11/19 23:16:22 by ndobashi         ###   ########.fr       */
+/*   Updated: 2025/11/20 18:13:39 by ndobashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <X11/X.h>
+#include <X11/keysym.h>
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
@@ -80,23 +81,49 @@ typedef struct s_map
 	int			shift_y;
 }	t_map;
 
+//core/main.c
 void	initialize_map(t_map *map);
 void	terminate_program(t_map *map, char *message, int exit_code);
+
+//events/event_handler.c
+int		handle_expose(t_map *map);
+int		handle_keypress(int keycode, t_map *map);
+int		handle_window_close(t_map *map);
+
+//events/z_scale_control.c
+void	z_scale_up(t_map *map);
+void	z_scale_down(t_map *map);
+
+//events/zoom_control.c
+int		handle_mouse(int button, int x, int y, t_map *map);
+
+//perser/map_reader_utils.c
+void	free_and_exit(char *line, int fd, t_map *map, char *msg);
+
+//perser/map_reader.c
 void	load_map_file(char *filename, t_map *map);
+
+//perser/map_validator.c
+void	validate_file_extension(char *filename);
 int		count_line_elements(char *line);
 int		parse_coordinates(t_point *points, char *line, int row, int width);
-void	render_wireframe(t_map *map);
+
+//renderer/draw_grid.c
+void	draw_grid(t_map *map, t_point **screen_points);
+
+//renderer/draw_line.c
 void	draw_line(t_map *map, t_point start, t_point end, int color);
 void	set_pixel(t_map *map, int x, int y, int color);
-t_point	project_to_screen(t_point point, t_map *map);
-int		handle_keypress(int keycode, t_map *map);
-int		handle_mouse(int button, int x, int y, t_map *map);
-int		handle_window_close(t_map *map);
-void	validate_file_extension(char *filename);
 
+//renderer/projection.c
+t_point	project_to_screen(t_point point, t_map *map);
+
+//renderer/render.c
+void	render_wireframe(t_map *map);
+
+//renderer/screen_transform.c
 t_point	**allocate_screen_points(t_map *map);
 void	free_screen_points(t_point **screen_points, int height);
-void	precompute_screen_points(t_map *map, t_point **screen_points);
-void	free_and_exit(char *line, int fd, t_map *map, char *msg);
+void	screen_transform(t_map *map, t_point **screen_points);
 
 #endif
